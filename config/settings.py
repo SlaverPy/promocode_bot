@@ -28,10 +28,11 @@ ADMINS_COMMANDS = (
     ('count', "Количество оставшихся промокодов"),
     ('loud_pr', "Загрузить промокоды"),
     ('set_time', 'Установить время окончания раздачи'),
+    ('reset ', 'Обнулить промокоды'),
 )
 
 TORTOISE_ORM = {
-    "connections": {"default": "sqlite://database/db.sqlite3"},
+    "connections": {"default": "sqlite://database/db/db.sqlite3"},
     "apps": {
         "models": {
             "models": ["database.model"],

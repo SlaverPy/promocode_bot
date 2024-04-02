@@ -16,3 +16,4 @@ class Promocods(Model):
     promocode = fields.CharField(max_length=255)
     is_active = fields.BooleanField(default=True)
     user = fields.ForeignKeyField('models.BotUser', on_delete=OnDelete.SET_NULL, null=True)
+    create_at = fields.DatetimeField(auto_now_add=True)

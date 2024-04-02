@@ -6,7 +6,7 @@ from loader import dp, bot
 from config.settings import TORTOISE_ORM
 from logs.logger import LoggerSetup
 from handlers.commands.info import start_bot, stop_bot
-from handlers.commands import commands_handler, admins_handler
+from handlers.commands import users_handler, admins_handler
 
 
 
@@ -21,7 +21,7 @@ async def on_startup():
     await Tortoise.init(config=TORTOISE_ORM)
     await Tortoise.generate_schemas()
     await start_bot()
-    dp.include_routers(commands_handler.router)
+    dp.include_routers(users_handler.router)
     dp.include_routers(admins_handler.router)
 
 

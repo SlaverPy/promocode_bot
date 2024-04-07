@@ -1,5 +1,5 @@
 from loader import bot
-from utils.commands import set_commands
+from .commands import set_commands
 from config.settings import ADMINS
 
 

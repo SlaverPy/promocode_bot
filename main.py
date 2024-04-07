@@ -5,8 +5,9 @@ import handlers
 from loader import dp, bot
 from config.settings import TORTOISE_ORM
 from logs.logger import LoggerSetup
-from handlers.commands.info import start_bot, stop_bot
+from utils.info_bot_status import start_bot, stop_bot
 from handlers.commands import users_handler, admins_handler
+from handlers.commands.admins_commands import set_time
 
 
 
@@ -23,6 +24,7 @@ async def on_startup():
     await start_bot()
     dp.include_routers(users_handler.router)
     dp.include_routers(admins_handler.router)
+    dp.include_routers(set_time.router)
 
 
 

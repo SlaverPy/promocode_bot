@@ -9,6 +9,7 @@ class BotUser(Model):
     username = fields.CharField(max_length=255)
     is_active = fields.BooleanField(default=True)
     can_get_code = fields.BooleanField(default=True)
+    create_at = fields.DatetimeField(auto_now_add=True)
 
 
 class Promocods(Model):
@@ -17,3 +18,8 @@ class Promocods(Model):
     is_active = fields.BooleanField(default=True)
     user = fields.ForeignKeyField('models.BotUser', on_delete=OnDelete.SET_NULL, null=True)
     create_at = fields.DatetimeField(auto_now_add=True)
+
+
+class DistributionTime(Model):
+    time_start = fields.DatetimeField(null=True)
+    time_end = fields.DatetimeField(null=True)

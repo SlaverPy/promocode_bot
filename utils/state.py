@@ -5,4 +5,6 @@ class PromoCodeState(StatesGroup):
     waiting_for_promocodes = State()
     set_time_for_promocodes = State()
     reset_promocodes = State()
+    start_time = State()
+    end_time = State()
 

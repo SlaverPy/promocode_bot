@@ -10,10 +10,10 @@ def time_for_start():
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[
         InlineKeyboardButton(text="Сейчас", callback_data=f"{now}"),
-        InlineKeyboardButton(text="Через час", callback_data=f"{next_hour}"),
-        InlineKeyboardButton(text="Через 2 часа", callback_data=f"{next_two_hours}"),
-        InlineKeyboardButton(text="Через 3 часа", callback_data=f"{next_three_hours}"),
-        InlineKeyboardButton(text="Ввести время", callback_data="input")
+        InlineKeyboardButton(text=f"{next_hour}", callback_data=f"{next_hour}"),
+        InlineKeyboardButton(text=f"{next_two_hours}", callback_data=f"{next_two_hours}"),
+        InlineKeyboardButton(text=f"{next_three_hours}", callback_data=f"{next_three_hours}"),
+        # InlineKeyboardButton(text="Ввести время", callback_data="input")
     ]])
 
     return keyboard

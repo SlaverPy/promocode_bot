@@ -1,3 +1,5 @@
+import datetime
+
 from aiogram import Router
 from aiogram.types import Message
 from aiogram.filters import Command
@@ -5,7 +7,7 @@ from aiogram.filters import Command
 from config.settings import ADMINS
 from database.model import Promocods, BotUser
 from config.settings import DEFAULT_COMMANDS, ADMINS_COMMANDS, ADMINS
-
+from database.model import DistributionTime
 router = Router()
 
 
@@ -25,14 +27,22 @@ async def start_command(message: Message):
 async def start_command(message: Message):
     user_id = message.from_user.id
     current_user = await BotUser.filter(user_id=user_id).first()
-    if current_user.can_get_code or user_id in ADMINS:
-        active_promocode = await Promocods.filter(is_active=True).first()
-        if active_promocode:
-            await message.answer(f"Ваш промокод: {active_promocode}.")
-            current_user.can_get_code = False
-            await current_user.save()
+    now = datetime.datetime.now()
+
+    # Проверяем, есть ли активный период распределения промокодов
+    active_distribution = await DistributionTime.filter(time_start__lte=now, time_end__gte=now).first()
+
+    if active_distribution:
+        if current_user.can_get_code or user_id in ADMINS:
+            active_promocode = await Promocods.filter(is_active=True).first()
+            if active_promocode:
+                await message.answer(f"Ваш промокод: {active_promocode}.")
+                current_user.can_get_code = False
+                await current_user.save()
+            else:
+                await message.answer("Извините, но промокоды закончились, следите за обновлением в чате.")
         else:
-            await message.answer("Извините, но промокоды закончились, следите за обновлением в чате.")
+            await message.answer(f"Вы уже получали промокод в текущей раздаче.")
     else:
-        await message.answer(f"Вы уже получали промокод в текущей раздаче.")
+        await message.answer("Извините, но в текущий момент недоступны промокоды.")
 

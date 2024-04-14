@@ -10,9 +10,10 @@ else:
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 admins_id_str = os.getenv('ADMINS_ID', [])
+INFO_GROUP = os.getenv('INFO_GROUP', [])
+
 try:
     ADMINS = json.loads(admins_id_str)
-    print(ADMINS[0])
 except json.JSONDecodeError:
     print("Ошибка декодирования JSON")
     admins_id_list = []
@@ -29,6 +30,7 @@ ADMINS_COMMANDS = (
     ('loud_pr', "Загрузить промокоды"),
     ('set_time', 'Установить время раздачи'),
     ('reset ', 'Обнулить промокоды'),
+    ('start_dist ', 'Начать раздача промокодов'),
 )
 
 TORTOISE_ORM = {

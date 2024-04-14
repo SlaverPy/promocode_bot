@@ -23,3 +23,4 @@ class Promocods(Model):
 class DistributionTime(Model):
     time_start = fields.DatetimeField(null=True)
     time_end = fields.DatetimeField(null=True)
+    create_at = fields.DatetimeField(auto_now_add=True)
